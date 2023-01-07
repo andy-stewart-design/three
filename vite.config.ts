@@ -1,6 +1,7 @@
 /** @type {import('vite').UserConfig} */
 import { defineConfig } from "vite";
 import { resolve } from "path";
+import glob from "glob";
 
 const root = resolve(__dirname, "src", "app");
 const outDir = resolve(__dirname, "dist");
@@ -19,11 +20,7 @@ export default defineConfig({
     outDir,
     emptyOutDir: true,
     rollupOptions: {
-      input: {
-        main: resolve(root, "index.html"),
-        "basic-scene": resolve(root, "basic-scene", "index.html"),
-        "transform-objects": resolve(root, "transform-objects", "index.html"),
-      },
+      input: glob.sync(resolve(root, "**/index.html")),
     },
   },
 });
