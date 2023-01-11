@@ -34,3 +34,7 @@
     background-color: #ffffff;
   }
 }
+
+.webgl {
+  outline: none;
+}
