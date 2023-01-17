@@ -10,9 +10,9 @@ export default defineConfig({
   root,
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
-      "@lib": resolve(__dirname, "./src/lib"),
-      "@styles": resolve(__dirname, "./src/lib/styles"),
+      "@": resolve(__dirname, "src"),
+      "@lib": resolve(__dirname, "src/lib"),
+      "@styles": resolve(__dirname, "src/lib/styles"),
     },
   },
   publicDir: resolve(__dirname, "public"),
