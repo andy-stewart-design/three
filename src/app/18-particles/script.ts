@@ -11,7 +11,7 @@ import {
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import "@styles/style.css";
-import dat from "dat.gui";
+// import dat from "dat.gui";
 
 function init() {
   // --------------------
