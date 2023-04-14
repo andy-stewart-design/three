@@ -1,6 +1,11 @@
 import {
+  AdditiveBlending,
+  // BoxGeometry,
   BufferAttribute,
   BufferGeometry,
+  // Clock,
+  // Mesh,
+  // MeshBasicMaterial,
   PerspectiveCamera,
   Points,
   PointsMaterial,
@@ -38,28 +43,42 @@ function init() {
 
   // GEOMETRY
   const particlesGeometry = new BufferGeometry();
-  const count = 5000;
+  const count = 20000;
   const positionsArray = new Float32Array(count * 3);
+  const colorArray = new Float32Array(count * 3);
 
   for (let i = 0; i < positionsArray.length; i++) {
     positionsArray[i] = (Math.random() - 0.5) * 10;
+    colorArray[i] = Math.random();
   }
 
-  const postionsAttribute = new BufferAttribute(positionsArray, 3);
-  particlesGeometry.setAttribute("position", postionsAttribute);
+  particlesGeometry.setAttribute(
+    "position",
+    new BufferAttribute(positionsArray, 3)
+  );
+  particlesGeometry.setAttribute("color", new BufferAttribute(colorArray, 3));
 
   // MATERIAL
   const particlesMaterial = new PointsMaterial({
     size: 0.1,
     sizeAttenuation: true,
-    color: "#ff88cc",
+    // color: "#ff88cc",
   });
   particlesMaterial.transparent = true;
   particlesMaterial.alphaMap = particleTexture;
+  // particlesMaterial.alphaTest = 0.001;
+  // particlesMaterial.depthTest = false;
+  particlesMaterial.depthWrite = false;
+  particlesMaterial.blending = AdditiveBlending;
+  particlesMaterial.vertexColors = true;
 
   // POINTS
   const particles = new Points(particlesGeometry, particlesMaterial);
   scene.add(particles);
+
+  // Test Cube
+  // const cube = new Mesh(new BoxGeometry(), new MeshBasicMaterial());
+  // scene.add(cube);
 
   // SIZES
 
@@ -111,7 +130,26 @@ function init() {
   // --------------------
   // ANIMATE
   // --------------------
+
+  // const clock = new Clock();
+
   function tick() {
+    // const elapsedTime = clock.getElapsedTime();
+
+    // particles.rotation.y = elapsedTime / 5;
+
+    // for (let i = 0; i < count; i++) {
+    //   const xIndex = i * 3;
+    //   const yIndex = xIndex + 1;
+    //   const xPos = particlesGeometry.attributes.position.array[xIndex];
+    //   // @ts-expect-error
+    //   particlesGeometry.attributes.position.array[yIndex] = Math.sin(
+    //     elapsedTime + xPos
+    //   );
+    // }
+
+    // particlesGeometry.attributes.position.needsUpdate = true;
+
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
